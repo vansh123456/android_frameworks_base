@@ -30,6 +30,67 @@
     <com.android.systemui.statusbar.policy.Clock
         android:id="@+id/clock"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|start"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <com.android.systemui.statusbar.policy.Clock
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            style="@style/TextAppearance.QS.ClockBig"
+            systemui:showDark="false" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/qs_clock_date_margin"
+            android:gravity="start">
+
+            <LinearLayout
+                android:id="@+id/collapsed_date_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.android.systemui.statusbar.policy.DateView
+                    android:id="@+id/collapsed_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.QS.Clock"
+                    systemui:datePattern="@string/wday_month_day_no_year_alarm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/expanded_date_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.android.systemui.statusbar.policy.DateView
+                    android:id="@+id/expanded_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.QS.Clock"
+                    systemui:datePattern="@string/abbrev_wday_month_day_no_year_alarm" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <com.android.systemui.statusbar.policy.NetworkTraffic
+        android:id="@+id/networkTraffic"
+        android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:singleLine="false"
+        android:lineSpacingMultiplier="1.2"
+        systemui:showDark="false"/>
+
+    <android.widget.Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:minWidth="48dp"
         android:gravity="center_vertical|start"
