@@ -1212,8 +1212,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (!mPowerKeyHandled) {
             mPowerKeyHandled = true;
             mHandler.removeMessages(MSG_POWER_LONG_PRESS);
-            // See if we deferred screen wake because long press power for torch is enabled
-            if (mResolvedLongPressOnPowerBeh(!isScreenOn() || isDozeMode())) {avior == LONG_PRESS_POWER_TORCH &&
+            // See if we deferred screen wake because long press power for touch is enabled
+            if (mResolvedLongPressOnPowerBehavior == LONG_PRESS_POWER_TORCH &&
                     (!isScreenOn() || isDozeMode())) {
                 wakeUpFromPowerKey(SystemClock.uptimeMillis());
             }
