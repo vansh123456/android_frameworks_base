@@ -788,9 +788,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 case MSG_RINGER_TOGGLE_CHORD:
                     handleRingerChordGesture();
                     break;
-                case MSG_TOGGLE_TORCH:
-                    toggleTorch();
-                    break;
                 case MSG_DISPATCH_VOLKEY_WITH_WAKE_LOCK: {
                     KeyEvent event = (KeyEvent) msg.obj;
                     dispatchMediaKeyWithWakeLockToAudioService(event);
@@ -799,6 +796,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mVolumeMusicControlActive = true;
                     break;
                 }
+                case MSG_TOGGLE_TORCH:
+                    toggleTorch();
+                    break;
             }
         }
     }
@@ -1402,6 +1402,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 final int powerKeyDeviceId = Integer.MIN_VALUE;
                 launchAssistAction(null, powerKeyDeviceId);
                 break;
+            case LONG_PRESS_POWER_HIDE_POCKET_LOCK:
+                mPowerKeyHandled = true;
+                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false, "Power - Long-Press - Hide Pocket Lock");
+                hidePocketLock(true);
+                mPocketManager.setListeningExternal(false);
+                break;
             case LONG_PRESS_POWER_TORCH:
                 mPowerKeyHandled = true;
                 // Toggle torch state asynchronously to help protect against
@@ -1410,12 +1416,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 Message msg = mHandler.obtainMessage(MSG_TOGGLE_TORCH);
                 msg.setAsynchronous(true);
                 msg.sendToTarget();
-                break;
-            case LONG_PRESS_POWER_HIDE_POCKET_LOCK:
-                mPowerKeyHandled = true;
-                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false, "Power - Long-Press - Hide Pocket Lock");
-                hidePocketLock(true);
-                mPocketManager.setListeningExternal(false);
                 break;
         }
     }
